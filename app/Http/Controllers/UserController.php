@@ -9,6 +9,7 @@ use DB;
 use Redirect;
 use Session;
 use View;
+use Log;
 
 class UserController extends Controller
 {
@@ -17,53 +18,29 @@ class UserController extends Controller
      * On 28 December 2023
      */
     public $successStatus = 200;
+
     public function loginUsers(Request $request)
-    {
-        DB::beginTransaction();
-        try {
-            $validator = Validator::make($request->all(), [
-                'user_name' => 'required',
-                'user_pwd' => 'required',
-            ]);
-
-            if ($validator->fails()) {
-                return Redirect::back()->with('error', 'User Name or Password Required');
-            }
-            $user_name = $request->input('user_name');
-            $user_pwd = $request->input('user_pwd');
-    
-            $login = Users::where('user_name', $user_name)->where('user_pwd', $user_pwd)->first();
-
-            DB::commit();
-            if ($login) {
-                if (session()->has('activeUser')) {
-                    Session::forget('activeUser');
-                }
-                $activeUser = array();
-                $data = new Users;
-                $data->user_id = $login->user_id;
-                $data->user_name = $login->user_name;
-                $data->user_pwd = $login->user_pwd;
-                $activeUser[] = $data;
-
-                Session::put('activeUser', $activeUser);
-
-
-                return Redirect("/dashboard");
-            } else {
-                return redirect()->back()->with('error', 'Incorrect Username or Password');
-            }
-
-        } catch (\Exception$e) {
-            DB::rollback();
-            Log::error($e);
-            return Redirect::back()->with('error', 'IT WORKS!');
+    { 
+        $validate = Validator::make($request->all(),[
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        if($validate->fails()) {
+            return redirect()->back()->with('error', 'Username or password is empty');
         }
+        $input = ['email' => request('email'), 'password' => request('password')];
+        $remember_token = $request->has('rememberMe') ? true : false;
+        if(auth()->attempt($input,$remember_token)){
+            return redirect('/dashboard');
+        }else {
+            return redirect('/login')->with('error', 'Invalid username or password');
+        }
+        
     }
+
     public function deleteAllSession(){
 
-        Session::forget('activeUser');
-
-        return View::make("Admin.login");
+        auth()->logout();
+        return redirect('/login');
     }
 }

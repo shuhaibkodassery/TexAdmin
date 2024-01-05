@@ -15,11 +15,10 @@
     <link rel="stylesheet" href="{{ asset('admin/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/wysiwyg.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="{{ asset('cosmetic/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
 </head>
 
 <body>
-    @if (session()->has('activeUser'))
     <div class="wrapper">
         <div class="main-header">
             <div class="logo-header">
@@ -28,7 +27,7 @@
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <i class="fa-solid fa-bars"></i>
                 </button>
                 <!-- <button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button> -->
             </div>
@@ -186,35 +185,30 @@
                 <ul class="nav">
                     <li class="nav-item {{ $path == 'dashboard' ? 'active' : ''}}">
                         <a href="/dashboard">
-                        <i class="fa-solid fa-gauge"></i>
+                            <i class="fa-solid fa-gauge"></i>
                             <p>Dashboard</p>
                             <!-- <span class="badge badge-count">5</span> -->
                         </a>
                     </li>
-                    <li class="nav-item {{ $path == 'blog' ? 'active' : ''}}">
-                        <a href="/admin/blog">
-                        <i class="fa-solid fa-blog"></i>
-                            <p>Blog</p>
+                    <li class="nav-item {{ $path == 'sales' ? 'active' : ''}}">
+                        <a href="/admin/sales">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                            <p>Sales</p>
                             <!-- <span class="badge badge-count">14</span> -->
                         </a>
                     </li>
-                    <li class="nav-item {{ $path == 'category' ? 'active' : '' }}">
-                        <a href="/admin/category">
-                        <i class="fa-solid fa-layer-group"></i>
-                            <p>Blog Category</p>
+                    <li class="nav-item {{ $path == 'sales-report' ? 'active' : ''}}">
+                        <a href="/admin/sales-report">
+                        <i class="fa-solid fa-table"></i>
+                            <p>Sales Report</p>
                             <!-- <span class="badge badge-count">14</span> -->
                         </a>
                     </li>
-                    <li class="nav-item {{ $path == 'company' ? 'active' : ''}}">
-                        <a href="/admin/company">
-                        <i class="fa-solid fa-building"></i>
-                            <p>Company</p>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ $path == 'header' ? 'active' : ''}}">
-                        <a href="/admin/header">
-                        <i class="fa-solid fa-bars"></i>
-                            <p>Header</p>
+                    <li class="nav-item {{ $path == 'product' ? 'active' : ''}}">
+                        <a href="/admin/product">
+                        <i class="fa-solid fa-shirt"></i>
+                            <p>Product</p>
+                            <!-- <span class="badge badge-count">14</span> -->
                         </a>
                     </li>
                 </ul>
@@ -223,11 +217,6 @@
         @yield('content')
     </div>
     </div>
-    @else
-    <div class="d-flex justify-content-center align-items-center" style="height:100vh;">
-        <h1>403 - ACCESS FORBIDDEN</h1>
-    </div>
-    @endif
 </body>
 <script src="{{ asset('admin/js/core/jquery.3.2.1.min.js') }}"></script>
 <script src="{{ asset('admin/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
@@ -246,6 +235,7 @@
 <script src="{{asset('admin/js/main.js')}}"></script>
 <script src="{{asset('admin/js/wysiwyg.js')}}"></script>
 <script>
-    $('#editor').wysiwyg();
+$('#editor').wysiwyg();
 </script>
+
 </html>
