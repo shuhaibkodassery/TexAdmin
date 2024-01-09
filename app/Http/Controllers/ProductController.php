@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Product_sale;
+use Carbon\Carbon;
 use DB;
 use Log;
 
@@ -15,7 +16,7 @@ class ProductController extends Controller
      * on 04 Jan 2024
      */
     public function createProduct(Request $request) {
-        try {Log::error($request);
+        try {
             DB::BeginTransaction();
             $product = Product::create([
                 'product_code' => $request->product_code,
@@ -51,15 +52,28 @@ class ProductController extends Controller
     public function createSale(Request $request) {
         try {
             DB::BeginTransaction();
+            $date = Carbon::now()->timezone('Asia/Kolkata')->toDateString();
             $sale = Product_sale::create([
                 'product_id' => $request->product_id,
                 'product_price' => $request->product_price,
-                'date' =>  $request->date,
+                'date' =>  $request->date ?? $date,
                 'discount' => $request->discount ?? 0,
             ]);
             DB::commit();
             return $sale;
         } catch (\Exception $e) {
+            Log::error($e);
+            DB::rollback();
+            return 3;
+        }
+    }
+
+    public function deleteSale($id) {
+        try {
+            DB::beginTransaction();
+            $delete = Product_sale::where('id', $id)->delete();
+            DB::commit();
+        } catch (\Exception $e) { 
             Log::error($e);
             DB::rollback();
             return 3;

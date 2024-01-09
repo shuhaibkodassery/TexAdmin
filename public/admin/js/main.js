@@ -35,8 +35,8 @@ function deleteProduct(id) {
         }
     }),
     jQuery.ajax({
-        url: pageURL.split('/')[0]+'/admin/product/'+id,
-        method: 'DELETE',
+        url: pageURL.split('/')[0]+'/admin/product/delete/'+id,
+        method: 'POST',
         success: (data) => {
             if(data == 3){
                 window.alert('Something went wrong')
@@ -80,4 +80,144 @@ $('#CreateSale').on('click', ()=> {
 
         }
     })
-})
+});
+
+$('#SaleReportFilter').on('click', ()=> {
+        filterSales();
+});
+
+function filterSales() {
+    from_date = $('#from_date').val();
+    to_date = $('#to_date').val();
+    window.location.href = pageURL.split('/')[0]+'/admin/sales-report?from_date='+from_date+'&to_date='+to_date;
+}
+
+$('#CreateExpense').on('click', ()=> {
+    $.ajaxSetup({
+        headers: {
+
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }),
+    jQuery.ajax({
+        url: pageURL.split('/')[0]+'/admin/expense',
+        method: 'POST',
+        data : {
+            expense: $('#expense').val(),
+            expense_amount: $('#expense_amount').val(),
+            date : $('#date').val(),
+        },
+        success: (data) => {
+            if(data == 3) {
+                window.alert('Something went wrong');
+            }else {
+                window.alert('Expense Created Successfully')
+                window.location.reload();
+            }
+        },
+        error: (data) => {
+            console.error(data);
+        }
+    })
+});
+
+function deleteExpense(id) {
+    $.ajaxSetup({
+        headers: {
+
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }),
+    jQuery.ajax({
+        url: pageURL.split('/')[0]+'/admin/expense/delete/'+id,
+        method: 'POST',
+        success: (data) => {
+            if(data == 3) {
+                window.alert('Something went wrong');
+            }else {
+                window.alert('Expense Deleted Successfully')
+                window.location.reload();
+            }
+        },
+        error: (data) => {
+            console.error(data);
+        }
+    })
+}
+
+$('#CreatePurchase').on('click', ()=> {
+    $.ajaxSetup({
+        headers: {
+
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }),
+    jQuery.ajax({
+        url: pageURL.split('/')[0]+'/admin/purchase',
+        method: 'POST',
+        data : {
+            purchase: $('#purchase').val(),
+            purchase_amount: $('#purchase_amount').val(),
+            date : $('#date').val(),
+        },
+        success: (data) => {
+            if(data == 3) {
+                window.alert('Something went wrong');
+            }else {
+                window.alert('Purchase Created Successfully')
+                window.location.reload();
+            }
+        },
+        error: (data) => {
+            console.error(data);
+        }
+    })
+});
+
+function deletePurchase(id) {
+    $.ajaxSetup({
+        headers: {
+
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }),
+    jQuery.ajax({
+        url: pageURL.split('/')[0]+'/admin/purchase/delete/'+id,
+        method: 'POST',
+        success: (data) => {
+            if(data == 3) {
+                window.alert('Something went wrong');
+            }else {
+                window.alert('Expense Deleted Successfully')
+                window.location.reload();
+            }
+        },
+        error: (data) => {
+            console.error(data);
+        }
+    })
+}
+
+function deleteSales(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }),
+    jQuery.ajax({
+        url: pageURL.split('/')[0]+'/admin/sales/delete/'+id,
+        method: 'POST',
+        
+        success: (data) => {
+            if(data == 3){
+                window.alert('Something went wrong');
+            }else {
+                window.alert('Sales Deleted Successfully');
+                window.location.reload();
+            }
+        },
+        error: (data) => {
+
+        }
+    })
+}

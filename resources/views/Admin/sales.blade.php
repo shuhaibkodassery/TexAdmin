@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="discount">Discount Amount</label>
-                                    <input type="text" class="form-control" id="discount" name="discount"
+                                    <input type="number" class="form-control" id="discount" name="discount"
                                         placeholder="Enter Discount Amount">
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                         <td>{{ $sale->product_name }}</td>
                                         <td>{{ $sale->product_price}}</td>
                                         <td>
-                                            <div class="i-btn" onclick="deleteProduct({{$sale->product_id}})"><i class="fa-solid fa-trash"></i></div>
+                                            <div class="i-btn" onclick="deleteSales({{$sale->id}})"><i class="fa-solid fa-trash"></i></div>
                                         </td>
                                     </tr>
                                     @endforeach

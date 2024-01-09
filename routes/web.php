@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\{ExpenseController,PurchaseController};
 
 /*
 |--------------------------------------------------------------------------
@@ -35,12 +36,24 @@ Route::group(['middleware' => 'user-auth'], function() {
         Route::group(['prefix' => 'sales'], function() {
             Route::get('/', [PagesController::class, 'loadSalesPageForAdmin']);
             Route::post('/', [ProductController::class, 'createSale']);
+            Route::post('delete/{id}', [ProductController::class, 'deleteSale']);
         });
         Route::group(['prefix' => 'product'], function() {
             Route::get('/', [PagesController::class, 'loadProductPageForAdmin']);
             Route::post('/', [ProductController::class, 'createProduct']);
-            Route::delete('/{id}', [ProductController::class, 'deleteProductByid']);
+            Route::post('delete/{id}', [ProductController::class, 'deleteProductByid']);
         });
         Route::get('/sales-report', [PagesController::class, 'SalesReportForAdmin']);
+        Route::group(['prefix' => 'expense'], function() {
+            Route::get('/', [PagesController::class, 'loadExpensePage']);
+            Route::post('/', [ExpenseController::class, 'createExpense']);
+            Route::put('/{id}', [ExpenseController::class, 'updateExpense']);
+            Route::post('delete/{id}', [ExpenseController::class, 'deleteExpense']);
+        });
+        Route::group(['prefix' => 'purchase'], function() {
+            Route::post('/', [PurchaseController::class, 'createPurchase']);
+            Route::get('/', [PagesController::class, 'getAllPurchase']);
+            Route::post('delete/{id}', [PurchaseController::class, 'deletePurchase']);
+        });
     });
 });

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Hameediya</title>
+    <title>Tex</title>
     @include('Admin.head')
 </head>
 <body class="login_body">

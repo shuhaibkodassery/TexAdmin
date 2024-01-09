@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Hameediya | Admin</title>
+    <title>Tex | Admin</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
@@ -208,6 +208,20 @@
                         <a href="/admin/product">
                         <i class="fa-solid fa-shirt"></i>
                             <p>Product</p>
+                            <!-- <span class="badge badge-count">14</span> -->
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $path == 'expense' ? 'active' : ''}}">
+                        <a href="/admin/expense">
+                        <i class="fa-solid fa-gears"></i>
+                            <p>Expense</p>
+                            <!-- <span class="badge badge-count">14</span> -->
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $path == 'purchase' ? 'active' : ''}}">
+                        <a href="/admin/purchase">
+                        <i class="fa-solid fa-gears"></i>
+                            <p>Purchase</p>
                             <!-- <span class="badge badge-count">14</span> -->
                         </a>
                     </li>
