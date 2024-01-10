@@ -21,10 +21,10 @@ Route::get('/', function () {
     if(Session('activeUser')){
         return redirect('/dashboard');
     }else {
-        return redirect('/login');
+        return redirect('/');
     }
 });
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('Admin.login');
 });
 Route::get('/logout', [UserController::class, 'deleteAllSession']);

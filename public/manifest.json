@@ -1,0 +1,17 @@
+{
+    "name": "Tex Admin",
+    "short_name": "TEX",
+    "start_url": "/index.php",
+    "background_color": "#bf1e2e",
+    "description": "Tex Admin",
+    "display": "fullscreen",
+    "theme_color": "#bf1e2e",
+    "icons": [
+        {
+            "src": "logo.PNG",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

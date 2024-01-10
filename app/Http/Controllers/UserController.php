@@ -33,7 +33,7 @@ class UserController extends Controller
         if(auth()->attempt($input,$remember_token)){
             return redirect('/dashboard');
         }else {
-            return redirect('/login')->with('error', 'Invalid username or password');
+            return redirect('/')->with('error', 'Invalid username or password');
         }
         
     }
@@ -41,6 +41,6 @@ class UserController extends Controller
     public function deleteAllSession(){
 
         auth()->logout();
-        return redirect('/login');
+        return redirect('/');
     }
 }

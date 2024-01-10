@@ -20,7 +20,7 @@ class CheckUserLoggedInOrNot
         if(auth()->check()) {
             return $next($request);
         }else {
-            return redirect('/login');
+            return redirect('/');
         }
     }
 }
