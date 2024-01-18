@@ -17,9 +17,11 @@
                                         <option>-- Select Product --</option>
                                         @foreach($products as $product)
                                         <option value="{{$product->product_id}}">{{$product->product_name}}</option>
-                                        <input type="hidden" id="product_price_{{$product->product_id}}" value="{{ $product->product_price }}">
                                         @endforeach
                                     </select>
+                                    @foreach($products as $product)
+                                    <input type="hidden" id="product_price_{{$product->product_id}}" value="{{ $product->product_price }}">
+                                    @endforeach
                                 </div>
                                 <div class="form-group">
                                     <label for="product_price">Product price</label>
